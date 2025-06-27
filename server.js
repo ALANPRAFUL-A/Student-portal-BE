@@ -25,9 +25,7 @@ const app = express();
 
 
 const allowedOrigins = [
-  "https://ephemeral-daffodil-28e8d0.netlify.app",
-  "https://warm-frangollo-91690f.netlify.app",
-  "tangerine-lebkuchen-89f579.netlify.app"
+  "astonishing-tarsier-522f3e.netlify.app"
 ];
 
 const corsOptions = {
