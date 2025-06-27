@@ -25,10 +25,12 @@ const app = express();
 
 
 const allowedOrigins = [
+  "https://ephemeral-daffodil-28e8d0.netlify.app",
+  "https://warm-frangollo-91690f.netlify.app",
   "astonishing-tarsier-522f3e.netlify.app"
 ];
 
-const corsOptions = {
+app.use(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
@@ -37,17 +39,13 @@ const corsOptions = {
     }
   },
   credentials: true
-};
+}));
 
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
 
 app.use((req, res, next) => {
   console.log("🌐 Incoming request from origin:", req.headers.origin);
   next();
 });
-
-
 
 
 const PORT = process.env.PORT || 5500;
@@ -75,7 +73,7 @@ app.post("/upload", upload.single("resume"), async (req, res) => {
 
     const filePath = req.file.path;
     const result = await resumeChecker(filePath);
-    fs.unlinkSync(filePath); 
+    fs.unlinkSync(filePath); // cleanup
 
     res.json(result);
   } catch (err) {
