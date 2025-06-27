@@ -24,10 +24,20 @@ dotenv.config();
 const app = express();
 
 
+const allowedOrigins = [
+  "https://ephemeral-daffodil-28e8d0.netlify.app",
+  "https://warm-frangollo-91690f.netlify.app"
+];
+
 app.use(cors({
-  origin: 'warm-frangollo-91690f.netlify.app',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
 }));
 
 
