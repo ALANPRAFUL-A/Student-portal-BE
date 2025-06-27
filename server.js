@@ -29,7 +29,7 @@ const allowedOrigins = [
   "https://warm-frangollo-91690f.netlify.app"
 ];
 
-app.use(cors({
+app.options(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
@@ -40,11 +40,14 @@ app.use(cors({
   credentials: true
 }));
 
+app.options("*", cors(corsOptions));
 
 app.use((req, res, next) => {
   console.log("🌐 Incoming request from origin:", req.headers.origin);
   next();
 });
+
+
 
 
 const PORT = process.env.PORT || 5500;
