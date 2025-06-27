@@ -24,10 +24,8 @@ dotenv.config();
 const app = express();
 
 
-const allowedOrigins = [
-  "https://ephemeral-daffodil-28e8d0.netlify.app",
-  "https://warm-frangollo-91690f.netlify.app"
-];
+const allowedOrigins = "tangerine-lebkuchen-89f579.netlify.app";
+
 
 app.options(cors({
   origin: function (origin, callback) {
@@ -75,7 +73,7 @@ app.post("/upload", upload.single("resume"), async (req, res) => {
 
     const filePath = req.file.path;
     const result = await resumeChecker(filePath);
-    fs.unlinkSync(filePath); // cleanup
+    fs.unlinkSync(filePath); 
 
     res.json(result);
   } catch (err) {
