@@ -24,10 +24,11 @@ dotenv.config();
 const app = express();
 
 
-const allowedOrigins = "tangerine-lebkuchen-89f579.netlify.app";
+const allowedOrigins = [
+  "https://tangerine-lebkuchen-89f579.netlify.app"
+];
 
-
-app.options(cors({
+const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
@@ -36,14 +37,20 @@ app.options(cors({
     }
   },
   credentials: true
-}));
+};
+
+
+app.use(cors(corsOptions));
+
 
 app.options("*", cors(corsOptions));
+
 
 app.use((req, res, next) => {
   console.log("🌐 Incoming request from origin:", req.headers.origin);
   next();
 });
+
 
 
 
