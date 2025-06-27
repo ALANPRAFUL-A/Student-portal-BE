@@ -25,10 +25,12 @@ const app = express();
 
 
 const allowedOrigins = [
-  "https://tangerine-lebkuchen-89f579.netlify.app"
+  "https://ephemeral-daffodil-28e8d0.netlify.app",
+  "https://warm-frangollo-91690f.netlify.app",
+  "tangerine-lebkuchen-89f579.netlify.app"
 ];
 
-const corsOptions = {
+app.options(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
@@ -37,20 +39,14 @@ const corsOptions = {
     }
   },
   credentials: true
-};
-
-
-app.use(cors(corsOptions));
-
+}));
 
 app.options("*", cors(corsOptions));
-
 
 app.use((req, res, next) => {
   console.log("🌐 Incoming request from origin:", req.headers.origin);
   next();
 });
-
 
 
 
