@@ -41,6 +41,12 @@ app.use(cors({
 }));
 
 
+app.use((req, res, next) => {
+  console.log("🌐 Incoming request from origin:", req.headers.origin);
+  next();
+});
+
+
 const PORT = process.env.PORT || 5500;
 
 
