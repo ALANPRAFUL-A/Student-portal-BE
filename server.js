@@ -25,7 +25,7 @@ const app = express();
 
 
 app.use(cors({
-  origin: 'https://ephemeral-daffodil-28e8d0.netlify.app',
+  origin: 'warm-frangollo-91690f.netlify.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));

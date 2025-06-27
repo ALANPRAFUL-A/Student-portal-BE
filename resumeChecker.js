@@ -7,7 +7,7 @@ const KEYWORDS = [
 ];
 
 export default async function resumeChecker(filePath) {
-  const uint8Array = new Uint8Array(fs.readFileSync(filePath)); // ✅ Fixed here
+  const uint8Array = new Uint8Array(fs.readFileSync(filePath)); 
   const loadingTask = pdfjsLib.getDocument({ data: uint8Array });
   const pdf = await loadingTask.promise;
 
